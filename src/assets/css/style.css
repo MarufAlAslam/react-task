@@ -1,8 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-*{
-    font-family: 'Inter', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mulish:wght@700&display=swap');
+* {
+  font-family: "Inter", sans-serif;
+}
+.mulish{
+    font-family: 'Mulish', sans-serif;
 }
 
-a.active{
-    color: #2962FF;
+a.active {
+  color: #2962ff;
+}
+:where(.css-dev-only-do-not-override-12upa3x).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  width: 100%;
+  height: 45px;
+  padding: 0 11px;
+  background-color: #F2F2F2;
+  border: none;
+}
+
+span.ant-select-selection-item, span.ant-select-selection-placeholder {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
 }
