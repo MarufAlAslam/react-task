@@ -124,7 +124,7 @@ const Sidebar = () => {
         <div>
           <div className="text-center">
             <Link to="/">
-              <img src={logo} alt="logo" className="mx-auto w-full" />
+              <img src={logo} alt="logo" className="mx-auto md:w-full" />
             </Link>
           </div>
           <button className="flex w-full justify-center items-center gap-2 border border-[#2E2F30] p-3 rounded">
