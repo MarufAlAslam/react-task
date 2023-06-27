@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <div className="flex md:flex-row flex-col justify-start items-start">
-        <div className="md:w-2/12 w-full">
+        <div className="md:w-3/12 w-full">
           <Sidebar />
         </div>
         <div className="md:w-9/12 w-full">
