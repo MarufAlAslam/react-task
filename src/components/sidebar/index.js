@@ -123,11 +123,17 @@ const Sidebar = () => {
 
   useEffect(() => {
     // get the current date from system
-    const timer = setInterval(() => setDate(new Date()), 1000);
+    // date format: Month Name Date, Hours:Minutes:Seconds
+    const timer = setInterval(() => {
+        setDate(new Date());
+    }, 1000);
     return () => {
       clearInterval(timer);
     };
   }, []);
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
   return (
     <div className="bg-[#F3F3F3] shadow-xl">
       <div className="flex-col justify-between items-start p-10 min-h-screen">
@@ -144,7 +150,7 @@ const Sidebar = () => {
           </button>
           <div className="text-right mt-1">
             <p className="text-xs">
-                {date.toLocaleDateString()} {date.toLocaleTimeString()}
+                {monthNames[date.getMonth()]} {date.getDate()}, {date.toLocaleTimeString()}
             </p>
           </div>
           <div className="mt-6 menu">
