@@ -28,7 +28,7 @@ const Main = () => {
 
   return (
     <div className="main p-10">
-      <h2 className="text-[22px]">KYC Verification </h2>
+      <h2 className="text-[22px] mt-8">KYC Verification </h2>
 
       <p>
         {error && (
