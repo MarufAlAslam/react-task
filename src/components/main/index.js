@@ -1,14 +1,42 @@
 import { Button, Checkbox, Input, Select } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import upload from "../../assets/images/svgs/upload.svg";
 
 const Main = () => {
+  const [error, setError] = useState("");
+
+  const formSubmitHandle = (e) => {
+    e.preventDefault();
+    setError("Please fill all the fields");
+  };
+
+  //   disable the submit button until all the fields are filled
+
+  useEffect(() => {
+    const form = document.querySelector("form");
+    const submitBtn = document.querySelector(".submit-btn");
+
+    form.addEventListener("change", () => {
+      if (form.checkValidity()) {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    });
+  }, []);
+
   return (
     <div className="main p-10">
       <h2 className="text-[22px]">KYC Verification </h2>
 
-      <form>
+      <p>
+        {error && (
+          <span className="text-red-600 text-sm font-semibold">{error}</span>
+        )}
+      </p>
+
+      <form onSubmit={formSubmitHandle}>
         <div className="form grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 gap-6">
           <div className="first">
             <div className="form-group mb-4">
@@ -18,7 +46,13 @@ const Main = () => {
               <Input
                 placeholder="Please enter your full name"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
-                required
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setError("");
+                  } else {
+                    setError("Full name is required");
+                  }
+                }}
               />
             </div>
             <div className="form-group mb-8">
@@ -28,6 +62,13 @@ const Main = () => {
               <Select
                 className="w-full border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
                 placeholder="Select your identity type"
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setError("");
+                  } else {
+                    setError("Identity Type is required");
+                  }
+                }}
               >
                 <Select.Option value="Driver's License">
                   Driver's License
@@ -81,7 +122,13 @@ const Main = () => {
               <Input
                 placeholder="Enter your full address "
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
-                required
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setError("");
+                  } else {
+                    setError("Address is required");
+                  }
+                }}
               />
             </div>
           </div>
@@ -93,7 +140,13 @@ const Main = () => {
               <Input
                 placeholder="Please enter your email"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
-                required
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setError("");
+                  } else {
+                    setError("Email is required");
+                  }
+                }}
               />
             </div>
             <div className="form-group mb-8">
@@ -103,7 +156,13 @@ const Main = () => {
               <Input
                 placeholder="Enter your government id number"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
-                required
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setError("");
+                  } else {
+                    setError("Government ID Number is required");
+                  }
+                }}
               />
             </div>
 
@@ -150,7 +209,13 @@ const Main = () => {
               <Input
                 placeholder="Enter your government id number"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
-                required
+                onChange={(e) => {
+                  if (e.target.value) {
+                    setError("");
+                  } else {
+                    setError("Government ID Number is required");
+                  }
+                }}
               />
             </div>
           </div>
@@ -183,7 +248,10 @@ const Main = () => {
             </div>
 
             <div className="flex justify-start items-center mt-5">
-              <Button className="bg-[#2E2F30] text-white text-sm font-semibold h-[45px] rounded mt-4 w-full uppercase mulish">
+              <Button
+                htmlType="submit"
+                className="bg-[#2E2F30] text-white text-sm font-semibold h-[45px] rounded mt-4 w-full uppercase mulish"
+              >
                 SUBMIT KYC
               </Button>
             </div>
