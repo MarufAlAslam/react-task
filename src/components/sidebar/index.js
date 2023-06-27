@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import avatar from "../../assets/images/svgs/avatar.svg";
 import eth from "../../assets/images/svgs/eth.svg";
@@ -17,6 +17,8 @@ import {
 const Sidebar = () => {
   const [resourceActive, setResourceActive] = useState(false);
   const [generalActive, setGeneralActive] = useState(false);
+  const [date, setDate] = useState(new Date());
+
   const menuItems = [
     {
       id: 1,
@@ -118,6 +120,14 @@ const Sidebar = () => {
     setGeneralActive(!generalActive);
     setResourceActive(false);
   };
+
+  useEffect(() => {
+    // get the current date from system
+    const timer = setInterval(() => setDate(new Date()), 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   return (
     <div className="bg-[#F3F3F3] shadow-xl">
       <div className="flex-col justify-between items-start p-10 min-h-screen">
@@ -133,7 +143,9 @@ const Sidebar = () => {
             <img src={eth} alt="eth" className="w-8 h-8" />
           </button>
           <div className="text-right mt-1">
-            <p className="text-xs">Mar 28, 17:15 UTC</p>
+            <p className="text-xs">
+                {date.toLocaleDateString()} {date.toLocaleTimeString()}
+            </p>
           </div>
           <div className="mt-6 menu">
             {menuItems.map((item) => (
