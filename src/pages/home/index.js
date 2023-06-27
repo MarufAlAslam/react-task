@@ -5,11 +5,11 @@ import Main from "../../components/main";
 const Home = () => {
   return (
     <div>
-      <div className="flex md:flex-row flex-col justify-start items-start">
-        <div className="md:w-3/12 w-full">
+      <div className="flex lg:flex-row flex-col justify-start items-start">
+        <div className="lg:w-2/12 w-full sidebar-holder">
           <Sidebar />
         </div>
-        <div className="md:w-9/12 w-full">
+        <div className="lg:w-9/12 w-full main-holder">
           <Main />
         </div>
       </div>

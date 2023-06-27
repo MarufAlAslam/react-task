@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mulish:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mulish:wght@700&display=swap");
 * {
   font-family: "Inter", sans-serif;
 }
-.mulish{
-    font-family: 'Mulish', sans-serif;
+.mulish {
+  font-family: "Mulish", sans-serif;
 }
 
 a.active {
@@ -16,16 +16,46 @@ a.active {
   width: 100%;
   height: 45px !important;
   padding: 0 11px;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   border: none;
 }
 
-span.ant-select-selection-item, span.ant-select-selection-placeholder {
-    height: 45px !important;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
+span.ant-select-selection-item,
+span.ant-select-selection-placeholder {
+  height: 45px !important;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 }
 .ant-select-selector {
-    height: 45px !important;
+  height: 45px !important;
+}
+
+@media screen and (max-width: 1400px) {
+  .sidebar-holder {
+    width: 25%;
+  }
+  .main-holder {
+    width: 75%;
+  }
+  .logo {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar-holder {
+    width: 30%;
+  }
+  .main-holder {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .sidebar-holder {
+    width: 100%;
+  }
+  .main-holder {
+    width: 100%;
+  }
 }
