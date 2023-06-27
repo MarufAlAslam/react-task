@@ -5,26 +5,72 @@ import upload from "../../assets/images/svgs/upload.svg";
 
 const Main = () => {
   const [error, setError] = useState("");
+  const [identityType, setIdentityType] = useState("");
+  const [idFrontName, setIdFrontName] = useState("");
+  const [idBackName, setIdBackName] = useState("");
+  const [selfieWithIdName, setSelfieWithIdName] = useState("");
+  const [selfieForProfilePictureName, setSelfieForProfilePictureName] =
+    useState("");
+
+  useEffect(() => {
+    setIdFrontName("Government ID Front");
+    setIdBackName("Government ID Back");
+    setSelfieWithIdName("Selfie with Government ID");
+    setSelfieForProfilePictureName("Selfie for Profile Picture");
+  }, []);
 
   const formSubmitHandle = (e) => {
     e.preventDefault();
-    setError("Please fill all the fields");
+
+    const form = e.target;
+
+    const fullName = form.fullName.value;
+    const email = form.email.value;
+    const tyoeOfIdentity = identityType;
+    const governmentIdNumber = form.governmentIdNumber.value;
+
+    // get the file name
+    const governmentIdFront = form.governmentIdFront.files[0].name;
+    const governmentIdBack = form.governmentIdBack.files[0].name;
+    const selfieWithGovernmentId = form.selfieWithGovernmentId.files[0].name;
+    const selfieForProfilePicture = form.selfieForProfilePicture.files[0].name;
+
+    const address = form.address.value;
+    const governmentIdNumber2 = form.governmentIdNumber2.value;
+
+    const kycData = {
+      fullName,
+      email,
+      tyoeOfIdentity,
+      governmentIdNumber,
+      governmentIdFront,
+      governmentIdBack,
+      selfieWithGovernmentId,
+      selfieForProfilePicture,
+      address,
+      governmentIdNumber2,
+    };
+
+    console.log(kycData);
+    // setError("Please fill all the fields");
   };
 
   //   disable the submit button until all the fields are filled
 
-  useEffect(() => {
-    const form = document.querySelector("form");
-    const submitBtn = document.querySelector(".submit-btn");
+  //   useEffect(() => {
+  //     const form = document.querySelector("form");
+  //     const submitBtn = document.querySelector(".submit-btn");
 
-    form.addEventListener("change", () => {
-      if (form.checkValidity()) {
-        submitBtn.disabled = false;
-      } else {
-        submitBtn.disabled = true;
-      }
-    });
-  }, []);
+  //     form.addEventListener("change", () => {
+  //       if (form.checkValidity()) {
+  //         submitBtn.disabled = false;
+  //       } else {
+  //         submitBtn.disabled = true;
+  //       }
+  //     });
+
+  //     // get the form data
+  //   }, []);
 
   return (
     <div className="main p-10">
@@ -46,6 +92,7 @@ const Main = () => {
               <Input
                 placeholder="Please enter your full name"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
+                name="fullName"
                 onChange={(e) => {
                   if (e.target.value) {
                     setError("");
@@ -62,11 +109,13 @@ const Main = () => {
               <Select
                 className="w-full border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
                 placeholder="Select your identity type"
-                onChange={(e) => {
-                  if (e.target.value) {
+                name="identityType"
+                onChange={(value) => {
+                  setIdentityType(value);
+                  if (value) {
                     setError("");
                   } else {
-                    setError("Identity Type is required");
+                    setError("Identity type is required");
                   }
                 }}
               >
@@ -82,9 +131,12 @@ const Main = () => {
               <div className="form-group mb-4">
                 <input
                   type="file"
-                  name="file"
+                  name="governmentIdFront"
                   id="file1"
                   className="inputfile hidden"
+                  onChange={(e) => {
+                    setIdFrontName(e.target.files[0].name);
+                  }}
                 />
                 <label
                   htmlFor="file1"
@@ -92,16 +144,17 @@ const Main = () => {
                 >
                   <img src={upload} alt="upload" className="" />
                 </label>
-                <p className="text-xs mt-2 text-[#757575]">
-                  Government ID Front
-                </p>
+                <p className="text-xs mt-2 text-[#757575]">{idFrontName}</p>
               </div>
               <div className="form-group mb-4">
                 <input
                   type="file"
-                  name="file"
+                  name="governmentIdBack"
                   id="file2"
                   className="inputfile hidden"
+                  onChange={(e) => {
+                    setIdBackName(e.target.files[0].name);
+                  }}
                 />
                 <label
                   htmlFor="file2"
@@ -109,9 +162,7 @@ const Main = () => {
                 >
                   <img src={upload} alt="upload" className="" />
                 </label>
-                <p className="text-xs mt-2 text-[#757575]">
-                  Government ID Back
-                </p>
+                <p className="text-xs mt-2 text-[#757575]">{idBackName}</p>
               </div>
             </div>
 
@@ -122,6 +173,7 @@ const Main = () => {
               <Input
                 placeholder="Enter your full address "
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
+                name="address"
                 onChange={(e) => {
                   if (e.target.value) {
                     setError("");
@@ -140,6 +192,7 @@ const Main = () => {
               <Input
                 placeholder="Please enter your email"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
+                name="email"
                 onChange={(e) => {
                   if (e.target.value) {
                     setError("");
@@ -156,6 +209,7 @@ const Main = () => {
               <Input
                 placeholder="Enter your government id number"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
+                name="governmentIdNumber"
                 onChange={(e) => {
                   if (e.target.value) {
                     setError("");
@@ -170,35 +224,41 @@ const Main = () => {
               <div className="form-group mb-4">
                 <input
                   type="file"
-                  name="file"
-                  id="file1"
+                  name="selfieWithGovernmentId"
+                  id="file3"
                   className="inputfile hidden"
+                  onChange={(e) => {
+                    setSelfieWithIdName(e.target.files[0].name);
+                  }}
                 />
                 <label
-                  htmlFor="file1"
+                  htmlFor="file3"
                   className="text-sm mb-2 font-semibold bg-[#F2F2F2] flex w-full h-[130px] justify-center items-center"
                 >
                   <img src={upload} alt="upload" className="" />
                 </label>
                 <p className="text-xs mt-2 text-[#757575]">
-                  Selfie with Government ID
+                  {selfieWithIdName}
                 </p>
               </div>
               <div className="form-group mb-4">
                 <input
                   type="file"
-                  name="file"
-                  id="file2"
+                  name="selfieForProfilePicture"
+                  id="file4"
                   className="inputfile hidden"
+                  onChange={(e) => {
+                    setSelfieForProfilePictureName(e.target.files[0].name);
+                  }}
                 />
                 <label
-                  htmlFor="file2"
+                  htmlFor="file4"
                   className="text-sm mb-2 font-semibold bg-[#F2F2F2] flex w-full h-[130px] justify-center items-center"
                 >
                   <img src={upload} alt="upload" className="" />
                 </label>
                 <p className="text-xs mt-2 text-[#757575]">
-                  Selfie for profile picture
+                  {selfieForProfilePictureName}
                 </p>
               </div>
             </div>
@@ -209,6 +269,7 @@ const Main = () => {
               <Input
                 placeholder="Enter your government id number"
                 className="border-none bg-[#F2F2F2] text-[16px] h-[45px] mt-2 rounded"
+                name="governmentIdNumber2"
                 onChange={(e) => {
                   if (e.target.value) {
                     setError("");
